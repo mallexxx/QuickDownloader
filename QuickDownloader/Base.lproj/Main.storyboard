@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <plugIn identifier="com.apple.automator.AutomatorPalette" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -333,7 +334,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="clear:" target="Oky-zY-oP4" id="WBN-25-Eik"/>
+                                            <segue destination="gJD-VV-iDa" kind="show" id="syV-A8-ebd"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -458,8 +459,8 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2wA-0a-WUr">
-                                <rect key="frame" x="8" y="2" width="39" height="17"/>
-                                <buttonCell key="cell" type="recessed" title="全部" bezelStyle="recessed" alignment="left" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5VK-Qg-lXW">
+                                <rect key="frame" x="8" y="2" width="29" height="17"/>
+                                <buttonCell key="cell" type="recessed" title="All" bezelStyle="recessed" alignment="left" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5VK-Qg-lXW">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" size="12" name=".AppleSystemUIFont"/>
                                 </buttonCell>
@@ -468,8 +469,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gbd-tw-S2u">
-                                <rect key="frame" x="55" y="2" width="51" height="17"/>
-                                <buttonCell key="cell" type="recessed" title="下载中" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gZ1-k9-PUY">
+                                <rect key="frame" x="45" y="2" width="50" height="17"/>
+                                <buttonCell key="cell" type="recessed" title="Active" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gZ1-k9-PUY">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" size="12" name=".AppleSystemUIFont"/>
                                 </buttonCell>
@@ -478,8 +479,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LNu-Ra-B5i">
-                                <rect key="frame" x="114" y="2" width="51" height="17"/>
-                                <buttonCell key="cell" type="recessed" title="已完成" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5EM-T7-pbk">
+                                <rect key="frame" x="103" y="2" width="62" height="17"/>
+                                <buttonCell key="cell" type="recessed" title="Finished" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5EM-T7-pbk">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" size="12" name=".AppleSystemUIFont"/>
                                 </buttonCell>
@@ -488,8 +489,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DNW-iQ-ZoJ">
-                                <rect key="frame" x="173" y="2" width="39" height="17"/>
-                                <buttonCell key="cell" type="recessed" title="失败" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NNV-Kz-Fca">
+                                <rect key="frame" x="173" y="2" width="48" height="17"/>
+                                <buttonCell key="cell" type="recessed" title="Failed" bezelStyle="recessed" alignment="left" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NNV-Kz-Fca">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" size="12" name=".AppleSystemUIFont"/>
                                 </buttonCell>
@@ -646,9 +647,12 @@ DQ
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSTouchBarDeleteTemplate" width="15" height="30"/>
-        <image name="NSTouchBarPauseTemplate" width="11" height="30"/>
+        <image name="NSTouchBarPauseTemplate" width="10" height="30"/>
         <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
         <image name="broom" width="64" height="64"/>
         <image name="settings" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="syV-A8-ebd"/>
+    </inferredMetricsTieBreakers>
 </document>

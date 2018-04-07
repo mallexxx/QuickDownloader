@@ -92,9 +92,21 @@ class ViewController: NSViewController {
         
         switch task.status {
         case .paused:
-            Aria2.global?.unpause(task.gid, completionHandler: nil)
+            Aria2.global?.unpause(task.gid){ _, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
+            }
         case .active, .waiting:
-            Aria2.global?.pause(task.gid, completionHandler: nil)
+            Aria2.global?.pause(task.gid){ _, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
+            }
         default:
             return
         }
@@ -154,11 +166,16 @@ extension ViewController {
     }
     
     func loadTasks() {
-        Aria2.global?.tellAll { [weak self] (tasks) in
+        Aria2.global?.tellAll { [weak self] (tasks, error) in
             guard let strongSelf = self else {
                 return
             }
             DispatchQueue.main.async {
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
                 strongSelf.reloadData(tasks ?? [])
                 strongSelf.startTimer()
             }
@@ -181,14 +198,26 @@ extension ViewController {
     @IBAction func pause(_ sender: Any) {
         let gids = self.selectedGids()
         gids.forEach { (gid) in
-            Aria2.global?.pause(gid, completionHandler: nil)
+            Aria2.global?.pause(gid){ _, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
+            }
         }
     }
     
     @IBAction func unpause(_ sender: Any) {
         let gids = self.selectedGids()
         gids.forEach { (gid) in
-            Aria2.global?.unpause(gid, completionHandler: nil)
+            Aria2.global?.unpause(gid){ _, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
+            }
         }
     }
     
@@ -201,16 +230,40 @@ extension ViewController {
     
     func removeTask(_ task: Aria2Task) {
         if task.status == .complete || task.status == .error || task.status == .removed {
-            Aria2.global?.removeDownloadResult(task.gid, completionHandler: nil)
+            Aria2.global?.removeDownloadResult(task.gid){ _, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                }
+            }
         } else {
-            Aria2.global?.remove(task.gid) { (gid) in
-                Aria2.global?.removeDownloadResult(task.gid, completionHandler: nil)
+            Aria2.global?.remove(task.gid) { (gid, error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        NSAlert(error: error).runModal()
+                    }
+                    return
+                }
+                Aria2.global?.removeDownloadResult(task.gid){ _, error in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            NSAlert(error: error).runModal()
+                        }
+                    }
+                }
             }
         }
     }
     
     @IBAction func clear(_ sender: Any) {
-        Aria2.global?.purgeDownloadResult(completionHandler: nil)
+        Aria2.global?.purgeDownloadResult{ _, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    NSAlert(error: error).runModal()
+                }
+            }
+        }
     }
 }
 

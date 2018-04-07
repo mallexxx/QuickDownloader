@@ -30,7 +30,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         self.statusController = StatusBarControler()
-        Aria2.global = Aria2(host: "127.0.0.1", port: "6800", secret: nil)
+        let defaults = UserDefaults.standard
+        let host = defaults.object(forKey: "aria2Host") as? String ?? "127.0.0.1"
+        let port = defaults.object(forKey: "aria2Port") as? String ?? "6800"
+        let secret = defaults.object(forKey: "aria2Secret") as? String
+        
+        guard defaults.object(forKey: "aria2DontAutoConnect") as? Bool != true else { return }
+        Aria2.global = Aria2(host: host, port: port, secret: secret)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -45,6 +51,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         return true
+    }
+    
+    func application(_ sender: NSApplication, openFiles filenames: [String]) {
+        Aria2.global?.addTorrents(atPaths: filenames, options: nil, position: nil) { (result, error) in
+            print("AddTorrents completed with \(result ?? "<nil>")")
+            if let error = error {
+                DispatchQueue.main.async {
+                    NSAlert(error: error).runModal()
+                }
+            } else if UserDefaults.standard.object(forKey: "keepTorrentFile") as? Bool != true {
+                for path in filenames {
+                    try? FileManager.default.trashItem(at: URL(fileURLWithPath: path), resultingItemURL: nil)
+                }
+            }
+        }
     }
 }
 

@@ -99,18 +99,19 @@ extension Aria2Task {
 
 extension Aria2Task.Status {
     func progressColor() -> NSColor {
-        switch self {
-        case .paused:
-            return NSColor(named: .bgPaused)!
-        case .error, .removed:
-            return NSColor(named: .bgError)!
-        case .complete:
-            return NSColor(named: .bgComplete)!
-        case .waiting:
-            return NSColor(named: .bgWaiting)!
-        default:
-            return NSColor(named: .bgActive)!
-        }
+        return NSColor(hexString: "#7685E3")!
+//        switch self {
+//        case .paused:
+//            return NSColor(named: .bgPaused)!
+//        case .error, .removed:
+//            return NSColor(named: .bgError)!
+//        case .complete:
+//            return NSColor(named: .bgComplete)!
+//        case .waiting:
+//            return NSColor(named: .bgWaiting)!
+//        default:
+//            return NSColor(named: .bgActive)!
+//        }
     }
 }
 
@@ -130,7 +131,7 @@ class ProgressView: NSView {
         super.draw(dirtyRect)
         
         let width: CGFloat = dirtyRect.width * CGFloat(self.value)
-        let rectanglePath = NSBezierPath(rect: NSRect(x: 0, y: 0, width: width, height: dirtyRect.height))
+        let rectanglePath = NSBezierPath(rect: NSRect(x: 0, y: 0, width: width, height: 3))
         self.status.progressColor().setFill()
         rectanglePath.fill()
     }

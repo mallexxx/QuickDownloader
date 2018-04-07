@@ -64,8 +64,14 @@ class NewTaskViewController: NSViewController {
             return
         }
         
-        aria2.addUri([url], options: ["dir": dir], position: 0) { (gid) in
-            self.close(nil)
+        aria2.addUri([url], options: ["dir": dir], position: 0) { (gid, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    NSAlert(error: error).runModal()
+                }
+            } else {
+                self.close(nil)
+            }
         }
     }
 }

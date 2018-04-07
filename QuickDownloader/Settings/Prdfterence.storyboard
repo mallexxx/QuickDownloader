@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="aSU-Dd-Bop">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <plugIn identifier="com.apple.automator.AutomatorPalette" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -66,7 +67,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="nuI-hS-her"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="默认下载目录:" id="VeA-I7-u86">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Download dir:" id="VeA-I7-u86">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -105,38 +106,33 @@
             <objects>
                 <viewController title="Aria2" id="Mdv-4f-nhS" sceneMemberID="viewController">
                     <view key="view" id="CBM-FJ-2EM">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="418"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="449"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mw-Rj-pAH">
-                                <rect key="frame" x="18" y="332" width="104" height="17"/>
+                                <rect key="frame" x="18" y="363" width="104" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="4Pu-r5-Alb"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="服务器地址:" id="R7i-nx-Iq7">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Server:" id="R7i-nx-Iq7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Vg-2T-4ap">
-                                <rect key="frame" x="128" y="330" width="237" height="22"/>
+                                <rect key="frame" x="128" y="361" width="237" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="127.0.0.1" drawsBackground="YES" id="sJ6-rV-ODM">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="5QH-dQ-YAG" name="enabled" keyPath="values.autoStart" id="wZb-mh-ZeG">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
                                     <binding destination="5QH-dQ-YAG" name="value" keyPath="values.aria2Host" id="Cga-OT-cDT"/>
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UyE-1Z-9Nq">
-                                <rect key="frame" x="370" y="330" width="60" height="22"/>
+                                <rect key="frame" x="370" y="361" width="60" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Cgk-rL-fQt"/>
                                 </constraints>
@@ -146,24 +142,19 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="5QH-dQ-YAG" name="enabled" keyPath="values.autoStart" id="Mbe-MT-03X">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
                                     <binding destination="5QH-dQ-YAG" name="value" keyPath="values.aria2Port" id="OH2-My-dDR"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qlS-tT-2ax">
-                                <rect key="frame" x="18" y="305" width="104" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="密码:" id="alq-Rc-gS6">
+                                <rect key="frame" x="18" y="336" width="104" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Secret:" id="alq-Rc-gS6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-jY-aAF">
-                                <rect key="frame" x="128" y="303" width="140" height="22"/>
+                                <rect key="frame" x="128" y="334" width="140" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="P6i-ZV-9pS"/>
                                 </constraints>
@@ -173,34 +164,25 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="5QH-dQ-YAG" name="enabled" keyPath="values.autoStart" id="WLQ-oH-yq3">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
                                     <binding destination="5QH-dQ-YAG" name="value" keyPath="values.aria2Secret" id="jjX-ih-alb"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q85-jh-kgr">
-                                <rect key="frame" x="128" y="250" width="61" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="连接" bezelStyle="roundedRect" image="NSStatusNone" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jfe-Kk-xqt">
+                                <rect key="frame" x="128" y="281" width="99" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="Connected" bezelStyle="roundedRect" image="NSStatusNone" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jfe-Kk-xqt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" size="12" name=".PingFangSC-Regular"/>
                                 </buttonCell>
-                                <connections>
-                                    <binding destination="5QH-dQ-YAG" name="enabled" keyPath="values.autoStart" id="PfC-d6-r4L">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </button>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ABu-Ix-R1U">
+                                <rect key="frame" x="20" y="263" width="410" height="5"/>
+                            </box>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="TqO-r3-ixS">
                                 <rect key="frame" x="20" y="232" width="410" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P3Q-f5-11b">
                                 <rect key="frame" x="18" y="201" width="104" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="参数:" id="lbx-7Z-Q5o">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Parameters:" id="lbx-7Z-Q5o">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -333,26 +315,26 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="obP-Ss-Uhy">
-                                <rect key="frame" x="128" y="31" width="92" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="启动Aria2" bezelStyle="roundedRect" image="NSStatusNone" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nlc-nE-pPz">
+                                <rect key="frame" x="128" y="31" width="109" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="launch Aria2" bezelStyle="roundedRect" image="NSStatusNone" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nlc-nE-pPz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" size="12" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BC5-aO-kcL">
-                                <rect key="frame" x="18" y="381" width="104" height="17"/>
+                                <rect key="frame" x="18" y="412" width="104" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Yyq-X8-mxg"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="启动方式:" id="rmT-JY-MdA">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Autostart:" id="rmT-JY-MdA">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nEL-ag-yLh">
-                                <rect key="frame" x="126" y="381" width="306" height="18"/>
-                                <buttonCell key="cell" type="check" title="跟随程序启停" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Agc-VV-zKc">
+                                <rect key="frame" x="126" y="412" width="306" height="18"/>
+                                <buttonCell key="cell" type="check" title="Launch Aria2 Server on system startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Agc-VV-zKc">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
@@ -361,21 +343,20 @@
                                 </connections>
                             </button>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="TzH-jt-vj1">
-                                <rect key="frame" x="20" y="362" width="410" height="5"/>
+                                <rect key="frame" x="20" y="393" width="410" height="5"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="571-TD-8HC">
-                                <rect key="frame" x="126" y="277" width="306" height="18"/>
-                                <buttonCell key="cell" type="check" title="自动连接" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dcg-fs-jgT">
+                                <rect key="frame" x="126" y="308" width="306" height="18"/>
+                                <buttonCell key="cell" type="check" title="Connect automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dcg-fs-jgT">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="5QH-dQ-YAG" name="enabled" keyPath="values.autoStart" id="iK7-dk-XnS">
+                                    <binding destination="5QH-dQ-YAG" name="value" keyPath="values.aria2DontAutoConnect" id="vwI-nM-gFq">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="5QH-dQ-YAG" name="value" keyPath="values.aria2AutoConnect" id="7H2-lH-Eq0"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="92P-Ku-Oo3">
@@ -388,6 +369,20 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6S-C0-ZHn">
+                                <rect key="frame" x="126" y="241" width="290" height="18"/>
+                                <buttonCell key="cell" type="check" title="Remove torrent file after successfully added" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="l0F-AJ-YBg">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="5QH-dQ-YAG" name="value" keyPath="values.keepTorrentFile" id="KEe-EJ-i2C">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ATk-Kv-nZO" firstAttribute="width" secondItem="Fl4-2X-aTc" secondAttribute="width" id="0UZ-7q-Zjy"/>
@@ -395,9 +390,11 @@
                             <constraint firstItem="ATk-Kv-nZO" firstAttribute="height" secondItem="Fl4-2X-aTc" secondAttribute="height" id="6AC-CW-39z"/>
                             <constraint firstItem="8lY-vJ-fbT" firstAttribute="top" secondItem="cQw-4y-Bqe" secondAttribute="bottom" constant="-1" id="6Ju-Nk-8xa"/>
                             <constraint firstItem="7Vg-2T-4ap" firstAttribute="centerY" secondItem="4mw-Rj-pAH" secondAttribute="centerY" id="6hM-MV-G00"/>
+                            <constraint firstItem="y6S-C0-ZHn" firstAttribute="top" secondItem="ABu-Ix-R1U" secondAttribute="bottom" constant="8" id="BdJ-XL-eQN"/>
                             <constraint firstItem="92P-Ku-Oo3" firstAttribute="height" secondItem="8lY-vJ-fbT" secondAttribute="height" id="CIf-5h-iPQ"/>
                             <constraint firstItem="obP-Ss-Uhy" firstAttribute="top" secondItem="8lY-vJ-fbT" secondAttribute="bottom" constant="10" id="CuN-34-Ywh"/>
                             <constraint firstItem="UyE-1Z-9Nq" firstAttribute="centerY" secondItem="7Vg-2T-4ap" secondAttribute="centerY" id="F4Z-Tc-KmV"/>
+                            <constraint firstItem="TqO-r3-ixS" firstAttribute="leading" secondItem="ABu-Ix-R1U" secondAttribute="leading" id="FTx-0d-fCf"/>
                             <constraint firstItem="TzH-jt-vj1" firstAttribute="top" secondItem="BC5-aO-kcL" secondAttribute="bottom" constant="16" id="FYv-yk-IhF"/>
                             <constraint firstItem="92P-Ku-Oo3" firstAttribute="trailing" secondItem="8lY-vJ-fbT" secondAttribute="trailing" id="H1h-Hi-wlc"/>
                             <constraint firstItem="UyE-1Z-9Nq" firstAttribute="leading" secondItem="7Vg-2T-4ap" secondAttribute="trailing" constant="5" id="HZz-na-RlW"/>
@@ -414,15 +411,17 @@
                             <constraint firstItem="8lY-vJ-fbT" firstAttribute="trailing" secondItem="cQw-4y-Bqe" secondAttribute="trailing" id="Tfl-P6-Fdw"/>
                             <constraint firstItem="qlS-tT-2ax" firstAttribute="trailing" secondItem="4mw-Rj-pAH" secondAttribute="trailing" id="Tke-qx-UUo"/>
                             <constraint firstItem="nEL-ag-yLh" firstAttribute="leading" secondItem="BC5-aO-kcL" secondAttribute="trailing" constant="8" id="Ucg-IG-xV3"/>
+                            <constraint firstItem="TqO-r3-ixS" firstAttribute="trailing" secondItem="ABu-Ix-R1U" secondAttribute="trailing" id="WdS-N9-C7Q"/>
                             <constraint firstAttribute="trailing" secondItem="TzH-jt-vj1" secondAttribute="trailing" constant="20" id="Xhx-Zn-Y6J"/>
+                            <constraint firstItem="P3Q-f5-11b" firstAttribute="top" secondItem="TqO-r3-ixS" secondAttribute="bottom" constant="16" id="XyR-lf-P7v"/>
                             <constraint firstItem="qlS-tT-2ax" firstAttribute="top" secondItem="4mw-Rj-pAH" secondAttribute="bottom" constant="10" id="ZpL-PS-KX0"/>
                             <constraint firstItem="ATk-Kv-nZO" firstAttribute="centerY" secondItem="Fl4-2X-aTc" secondAttribute="centerY" id="bh4-cV-67E"/>
-                            <constraint firstItem="P3Q-f5-11b" firstAttribute="top" secondItem="ABu-Ix-R1U" secondAttribute="bottom" constant="16" id="byU-mA-y7n"/>
                             <constraint firstItem="4mw-Rj-pAH" firstAttribute="top" secondItem="TzH-jt-vj1" secondAttribute="top" constant="16" id="cZ0-0X-oVE"/>
                             <constraint firstItem="BC5-aO-kcL" firstAttribute="leading" secondItem="CBM-FJ-2EM" secondAttribute="leading" constant="20" id="d57-2g-U3k"/>
                             <constraint firstItem="P3Q-f5-11b" firstAttribute="leading" secondItem="4mw-Rj-pAH" secondAttribute="leading" id="esN-NC-Wid"/>
                             <constraint firstItem="q85-jh-kgr" firstAttribute="leading" secondItem="ZG6-jY-aAF" secondAttribute="leading" id="fCi-PW-4m7"/>
                             <constraint firstAttribute="trailing" secondItem="nEL-ag-yLh" secondAttribute="trailing" constant="20" id="fVf-Jm-g4d"/>
+                            <constraint firstItem="y6S-C0-ZHn" firstAttribute="leading" secondItem="nEL-ag-yLh" secondAttribute="leading" id="g5d-bN-9Qj"/>
                             <constraint firstItem="cQw-4y-Bqe" firstAttribute="top" secondItem="P3Q-f5-11b" secondAttribute="top" id="hCY-Qz-1qQ"/>
                             <constraint firstItem="P3Q-f5-11b" firstAttribute="trailing" secondItem="4mw-Rj-pAH" secondAttribute="trailing" id="hfD-KW-W1K"/>
                             <constraint firstItem="q85-jh-kgr" firstAttribute="top" secondItem="571-TD-8HC" secondAttribute="bottom" constant="10" id="iQj-Kb-AUV"/>
@@ -431,6 +430,7 @@
                             <constraint firstAttribute="trailing" secondItem="cQw-4y-Bqe" secondAttribute="trailing" constant="20" id="jsW-EQ-Nf0"/>
                             <constraint firstItem="BC5-aO-kcL" firstAttribute="top" secondItem="CBM-FJ-2EM" secondAttribute="top" constant="20" id="kjR-rC-iJb"/>
                             <constraint firstItem="obP-Ss-Uhy" firstAttribute="leading" secondItem="cQw-4y-Bqe" secondAttribute="leading" id="lPs-2O-oxT"/>
+                            <constraint firstItem="TqO-r3-ixS" firstAttribute="top" secondItem="y6S-C0-ZHn" secondAttribute="bottom" constant="8" id="m3n-pK-4Yc"/>
                             <constraint firstItem="ABu-Ix-R1U" firstAttribute="top" secondItem="q85-jh-kgr" secondAttribute="bottom" constant="16" id="m5Q-Hy-QC4"/>
                             <constraint firstItem="ABu-Ix-R1U" firstAttribute="leading" secondItem="CBM-FJ-2EM" secondAttribute="leading" constant="20" id="me9-mO-fhV"/>
                             <constraint firstAttribute="trailing" secondItem="571-TD-8HC" secondAttribute="trailing" constant="20" id="nWq-h0-Xro"/>

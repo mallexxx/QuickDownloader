@@ -98,6 +98,11 @@ struct Aria2Response <T: Decodable> : Decodable {
     var jsonrpc: String
     var result: T?
 }
+struct Aria2ErrorResponse: Decodable {
+    var id: String
+    var jsonrpc: String
+    var error: Aria2Error
+}
 
 typealias Aria2GIDResponse = Aria2Response<String>
 typealias Aria2GIDsResponse = Aria2Response<[String]>

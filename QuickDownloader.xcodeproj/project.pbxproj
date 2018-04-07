@@ -26,6 +26,8 @@
 		518FDF691FF4BF0E00455CA5 /* Aria2TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518FDF681FF4BF0E00455CA5 /* Aria2TaskTests.swift */; };
 		519FE5E51FF5F6B4000A71B2 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 519FE5E41FF5F6B4000A71B2 /* Automator.framework */; };
 		519FE5E71FF61563000A71B2 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519FE5E61FF61563000A71B2 /* NewTaskViewController.swift */; };
+		B6AC7D0A20787C1100E5E7D8 /* torrent-document.icns in Resources */ = {isa = PBXBuildFile; fileRef = B6AC7D0920787C1100E5E7D8 /* torrent-document.icns */; };
+		B6AC7D0C2078820900E5E7D8 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B6AC7D0B2078820900E5E7D8 /* AppIcon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		518FDF681FF4BF0E00455CA5 /* Aria2TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aria2TaskTests.swift; sourceTree = "<group>"; };
 		519FE5E41FF5F6B4000A71B2 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
 		519FE5E61FF61563000A71B2 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		B6AC7D0920787C1100E5E7D8 /* torrent-document.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "torrent-document.icns"; sourceTree = "<group>"; };
+		B6AC7D0B2078820900E5E7D8 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 				510A11B81FF3983C0091CFE1 /* UI */,
 				510A11881FECB8910091CFE1 /* Assets.xcassets */,
 				510A118A1FECB8910091CFE1 /* Main.storyboard */,
+				B6AC7D0B2078820900E5E7D8 /* AppIcon.icns */,
+				B6AC7D0920787C1100E5E7D8 /* torrent-document.icns */,
 				510A118D1FECB8910091CFE1 /* Info.plist */,
 				510A118E1FECB8910091CFE1 /* QuickDownloader.entitlements */,
 			);
@@ -220,7 +226,7 @@
 				TargetAttributes = {
 					510A11801FECB8910091CFE1 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -259,7 +265,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				511C50D61FFF2F1E00BA25EB /* Prdfterence.storyboard in Resources */,
+				B6AC7D0C2078820900E5E7D8 /* AppIcon.icns in Resources */,
 				510A11891FECB8910091CFE1 /* Assets.xcassets in Resources */,
+				B6AC7D0A20787C1100E5E7D8 /* torrent-document.icns in Resources */,
 				510A118C1FECB8910091CFE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,14 +442,15 @@
 		510A119D1FECB8910091CFE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = BPL95996PK;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QuickDownloader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = im.zorro.QuickDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -449,14 +458,15 @@
 		510A119E1FECB8910091CFE1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = BPL95996PK;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QuickDownloader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = im.zorro.QuickDownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -466,9 +476,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = BPL95996PK;
 				INFOPLIST_FILE = QuickDownloaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = im.zorro.QuickDownloaderTests;
@@ -483,9 +493,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = BPL95996PK;
 				INFOPLIST_FILE = QuickDownloaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = im.zorro.QuickDownloaderTests;

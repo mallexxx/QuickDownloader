@@ -22,6 +22,15 @@
 
 import Foundation
 
+struct Aria2Error: Error, LocalizedError, Codable {
+    let code: Int
+    let message: String
+    
+    var errorDescription: String? {
+        return "Error code \(code). \(message)"
+    }
+}
+
 class Aria2 {
     enum Method: String {
         case addUri
@@ -122,23 +131,30 @@ class Aria2 {
 }
 
 
-func handleData<T: Decodable>(_ data: Data?, completionHandler: ((T?)->Void)?) {
+func handleData<T: Decodable>(_ data: Data?, completionHandler: ((T?, Error?)->Void)?) {
     guard let callback = completionHandler else {
         return
     }
     
-    guard let result = data,
-        let response = try? JSONDecoder().decode(Aria2Response<T>.self, from: result)
-        else {
-            callback(nil)
-            return
+    guard let result = data else {
+        callback(nil, nil)
+        return
+    }
+    if let response = try? JSONDecoder().decode(Aria2ErrorResponse.self, from: result) {
+        callback(nil, response.error)
+        return
     }
     
-    callback(response.result)
+    guard let response = try? JSONDecoder().decode(Aria2Response<T>.self, from: result) else {
+        callback(nil, nil)
+        return
+    }
+    
+    callback(response.result, nil)
 }
 
 extension Aria2 {
-    func addUri(_ uris: [String], options:[String: String]?, position: Int?, completionHandler: ((String?)->Void)? = nil) {
+    func addUri(_ uris: [String], options:[String: String]?, position: Int?, completionHandler: ((String?, Error?)->Void)? = nil) {
         var params:[Any] = [uris]
         if let opt = options {
             params.append(opt)
@@ -152,37 +168,62 @@ extension Aria2 {
         }
     }
     
-    func pause(_ gid: String, completionHandler: ((String?)->Void)? = nil) {
+    func addTorrents(atPaths paths: [String], options:[String: String]?, position: Int?, completionHandler: ((String?, Error?)->Void)? = nil) {
+        var params = [Any]()
+        do {
+            for path in paths {
+                let contents = try Data(contentsOf: URL(fileURLWithPath: path))
+                let encoded = contents.base64EncodedString()
+
+                params.append( encoded )
+            }
+        } catch {
+            completionHandler?(nil, error)
+            return
+        }
+        if let opt = options {
+            params.append(opt)
+        }
+        if let pos = position {
+            params.append(pos)
+        }
+        
+        self.request(method: .addTorrent, params: params) { (data) in
+            handleData(data, completionHandler: completionHandler)
+        }
+    }
+    
+    func pause(_ gid: String, completionHandler: ((String?, Error?)->Void)? = nil) {
         self.request(method: .pause, params: [gid]) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func unpause(_ gid: String, completionHandler: ((String?)->Void)? = nil) {
+    func unpause(_ gid: String, completionHandler: ((String?, Error?)->Void)? = nil) {
         self.request(method: .unpause, params: [gid]) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func remove(_ gid: String, completionHandler: ((String?)->Void)? = nil) {
+    func remove(_ gid: String, completionHandler: ((String?, Error?)->Void)? = nil) {
         self.request(method: .remove, params: [gid]) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func removeDownloadResult(_ gid: String, completionHandler: ((String?)->Void)? = nil) {
+    func removeDownloadResult(_ gid: String, completionHandler: ((String?, Error?)->Void)? = nil) {
         self.request(method: .removeDownloadResult, params: [gid]) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func purgeDownloadResult(completionHandler: ((Bool?)->Void)? = nil) {
+    func purgeDownloadResult(completionHandler: ((Bool?, Error?)->Void)? = nil) {
         self.request(method: .purgeDownloadResult, params: nil) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func tellStatus(_ gid: String, keys: [String]?, completionHandler: (([Aria2Task]?)->Void)? = nil) {
+    func tellStatus(_ gid: String, keys: [String]?, completionHandler: (([Aria2Task]?, Error?)->Void)? = nil) {
         var params:[Any] = [gid]
         if keys != nil {
             params += (keys! as [Any])
@@ -193,13 +234,13 @@ extension Aria2 {
         }
     }
     
-    func tellActive(keys: [String]? = nil, completionHandler: (([Aria2Task]?)->Void)? = nil) {
+    func tellActive(keys: [String]? = nil, completionHandler: (([Aria2Task]?, Error?)->Void)? = nil) {
         self.request(method: .tellActive, params: keys) { (data) in
             handleData(data, completionHandler: completionHandler)
         }
     }
     
-    func tellWaiting(offset: Int, num: Int, keys: [String]? = nil, completionHandler: (([Aria2Task]?)->Void)? = nil) {
+    func tellWaiting(offset: Int, num: Int, keys: [String]? = nil, completionHandler: (([Aria2Task]?, Error?)->Void)? = nil) {
         var params: [Any] = [offset, num]
         if keys != nil {
             params += (keys! as [Any])
@@ -209,7 +250,7 @@ extension Aria2 {
         }
     }
     
-    func tellStopped(offset: Int, num: Int, keys: [String]? = nil, completionHandler: (([Aria2Task]?)->Void)? = nil) {
+    func tellStopped(offset: Int, num: Int, keys: [String]? = nil, completionHandler: (([Aria2Task]?, Error?)->Void)? = nil) {
         var params: [Any] = [offset, num]
         if keys != nil {
             params += (keys! as [Any])
@@ -228,7 +269,7 @@ extension Aria2 {
 
 // Convenience
 extension Aria2 {
-    func tellAll(keys: [String]? = nil, completionHandler: @escaping (([Aria2Task]?)->Void)) {
+    func tellAll(keys: [String]? = nil, completionHandler: @escaping (([Aria2Task]?, Error?)->Void)) {
         weak var weakSelf = self
         var allTasks: [Aria2Task] = []
         
@@ -238,13 +279,15 @@ extension Aria2 {
             }
         }
         
-        self.tellActive { (tasks) in
+        self.tellActive { (tasks, error) in
+            guard error == nil else { completionHandler(nil, error!); return }
             handleData(tasks)
-            weakSelf?.tellWaiting(offset: 0, num: Int.max, completionHandler: { (tasks) in
+            weakSelf?.tellWaiting(offset: 0, num: Int.max, completionHandler: { (tasks, error) in
+                guard error == nil else { completionHandler(nil, error!); return }
                 handleData(tasks)
-                weakSelf?.tellStopped(offset: 0, num: Int.max, completionHandler: { (tasks) in
+                weakSelf?.tellStopped(offset: 0, num: Int.max, completionHandler: { (tasks, error) in
                     handleData(tasks)
-                    completionHandler(allTasks)
+                    completionHandler(allTasks, error)
                 })
             })
         }
